@@ -2,7 +2,7 @@
 
 namespace Wambo\Test;
 
-use Slim\Http\Response;
+use Slim\Views\PhpRenderer;
 
 class Test
 {
@@ -11,10 +11,19 @@ class Test
      */
     public function __construct($app)
     {
+        // Get container
+        $container = $app->getContainer();
+
+        // Register component on container
+        $container['view'] = function ($container) {
+            $path = realpath( dirname(__FILE__) . '/../view') . '/';
+            return new PhpRenderer($path);
+        };
+
         $app->get('/test', function ($request, $response, $args) {
-            /** @var $response Response */
-            $response->write("Hello TEST Wambo!");
-            return $response;
+            return $this->view->render($response, 'test.php', [
+                'name' => $args['name']
+            ]);
         });
     }
 }
