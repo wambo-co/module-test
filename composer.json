@@ -25,6 +25,8 @@
   },
   "require": {
     "wambo/module-core": "dev-develop"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.4.*"
   }
 }
-
