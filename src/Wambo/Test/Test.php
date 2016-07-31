@@ -13,10 +13,7 @@ class Test implements ModuleBootstrapInterface
      */
     public function __construct(App $app)
     {
-        // Get container
-        $container = $app->getContainer();
-
-        $app->get('/test', function ($request, $response, $args) {
+        $app->get('/test', function ($request, $response) {
             /** @var $response Response */
             $response->write("Hello form Test Module!");
             return $response;
